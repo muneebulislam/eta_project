@@ -1,0 +1,47 @@
+ <!-- Base template for the application -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>Eta Recipes</title>
+        {% endif %}
+    </head>
+    <style>
+        ul {
+          color: red;
+          display: block;
+          list-style-type: disc;
+          margin-top: 1em;
+          margin-bottom: 1 em;
+          margin-left: 0;
+          margin-right: 0;
+          padding-left: 40px;
+        }
+        </style>
+    <body>
+        <div>
+            Eta Recipes <br>
+            <a href="{{ url_for('home') }}">Home</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </div>
+         <!-- Flash messages from the flask application will be displayed here -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+        {% for message in messages %}
+        <li>
+        {{ message }}
+        </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>
+</html>
