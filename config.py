@@ -1,5 +1,5 @@
 """
-This module provides the configurations for the application. 
+This module provides the configurations for the flask application. 
 """
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
