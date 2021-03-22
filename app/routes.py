@@ -13,14 +13,14 @@ from app.models import User
 @login_required
 def home():
     """
-    Provides funcionality for the home page route.
+    Provides functionality for the home page route.
     """
     title = 'Home Page'
     return render_template('home.html', title=title)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """
-    Provides funcionality for the login page.
+    Provides functionality for the login page.
     """
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -47,7 +47,7 @@ def logout():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     """
-    Povides funcionality for the sign up  page.
+    Provides functionality for the sign up  page.
     """
 
     if current_user.is_authenticated:

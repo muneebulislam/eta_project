@@ -1,5 +1,5 @@
 """
-This module creates User objects for the databse. It also use build in modules like flask-login and werkzeug.security.
+This module creates User objects for the database. It also use build in modules like flask-login and werkzeug.security.
 To set password and check password. It also creates a hash-code for the password to provide security for the system 
 from some unknown attacks. Password is not in string form but is hashed.
 """
@@ -16,21 +16,21 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     def __repr__(self):
-        return '<User  username: {} email: {}  hashed passowrd: {}>'.format(self.username,self.email,self.password_hash)
+        return '<User  username: {} email: {}  hashed password: {}>'.format(self.username,self.email,self.password_hash)
     def set_password(self, password):
         """
         Sets password for a new user. 
-        @passowrd: password entered by the user.
+        @password: password entered by the user.
         @return: returns a hash-code for the password.
         """
         self.password_hash = generate_password_hash(password)
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-@login.user_loader
-def load_user(id):
-    """
-    Used to get infomation for a user in database.
-    @id: id of the user
-    @return: returns the User for the given id.
-    """
-    return User.query.get(int(id))
+    @login.user_loader
+    def load_user(id):
+        """
+        Used to get infomation for a user in database.
+        @id: id of the user
+        @return: returns the User for the given id.
+        """
+        return User.query.get(int(id))
