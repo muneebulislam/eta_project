@@ -1,0 +1,24 @@
+ <!--   Login Page -->
+ {% extends "base.html" %}
+ {% block content %}
+    <form action = "" method='POST'>
+         <p>Search Recipe: <input type = "text" name = "Search Recipe" /></p>
+         <p><input type = "submit" value = "submit" /></p>
+          </form>
+
+        <table>
+            {% for recipe in recipe_list %}
+                <tr>
+                    <td>
+                        <img src= "{{recipe['recipe']['image']}}" alt="recipe image" usemap="#workmap">
+                        <map name="workmap">
+                            <area shape="default"  href={{recipe['recipe']['url']}}>
+                        </map>
+                    </td>
+                    <td>
+                         {{recipe['recipe']['label']}}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+{% endblock %}
