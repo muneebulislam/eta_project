@@ -1,5 +1,5 @@
 """
-This module will initilize the applicaiton object.
+This module will initialize the application object.
 """
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy

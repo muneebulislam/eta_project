@@ -1,7 +1,7 @@
 """
-This module perform the funcionality of creating the Login forms and Sign up forms.
-It makes use of the funcionality of built in wtforms modules adopted for the 
-Flask applicaitons. 
+This module perform the functionality of creating the Login forms and Sign up forms.
+It makes use of the functionality of built in wtforms modules adopted for the 
+Flask applications. 
 """
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField,BooleanField 
@@ -33,14 +33,14 @@ class RegistrationForm(FlaskForm):
         """
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
-            raise ValidationError('Please use a different username becuase this username is already taken.')
+            raise ValidationError('Please use a different username because this username is already taken.')
 
     def validate_email(self, email):
         """
-        Validates the email address of the user. If the email adress is registered with some other user in the
+        Validates the email address of the user. If the email address is registered with some other user in the
         database then returns an error message in string form.
         @email: email address of the user.
         """
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
-            raise ValidationError('Please use a different email address becuase this email address is already registered with some other user.')
+            raise ValidationError('Please use a different email address because this email address is already registered with some other user.')
