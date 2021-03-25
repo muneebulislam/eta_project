@@ -6,6 +6,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.urls import url_parse
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
+from app.recipe_construct import Recipe
 from app.models import User
 
 @app.route('/')
@@ -23,7 +24,7 @@ def login():
     Provides functionality for the login page.
     """
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -61,3 +62,23 @@ def register():
         flash('You have been registered successfully!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+@app.route('/recipe_search', methods=['GET', 'POST'])
+def recipe_search():
+    APP_ID = "a8ee5e3a"  # Put your app id for edamam api
+    APP_KEY = "a5af30bf418171d4c205bb8c27cb02f2"  # Put your app key for edamam api
+
+    NUTRITION_ID = "70dc1ef4"
+    NUTRITION_KEY = "aeff761abf4758bc4076d53add38585e"
+
+    search = "chicken"
+    if request.method == 'POST':
+        result = request.form
+        search = result["Search Recipe"]
+
+    recipe_app = Recipe(APP_ID, APP_KEY, NUTRITION_ID, NUTRITION_KEY)
+    recipe_list = recipe_app.run_search_query(search)
+
+
+    return render_template("recipe_display.html", recipe_list=recipe_list )
+

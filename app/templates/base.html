@@ -29,6 +29,9 @@
             {% else %}
             <a href="{{ url_for('logout') }}">Logout</a>
             {% endif %}
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('recipe_search') }}">Search Recipe</a>
+            {% endif %}
         </div>
          <!-- Flash messages from the flask application will be displayed here -->
         {% with messages = get_flashed_messages() %}
