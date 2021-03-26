@@ -7,6 +7,11 @@
           </form>
 
         <table>
+            <tr>
+                <th>Recipe Image</th>
+                <th>Recipe Title</th>
+                <th>Calories</th>
+            </tr>
             {% for recipe in recipe_list %}
                 <tr>
                     <td>
@@ -17,6 +22,9 @@
                     </td>
                     <td>
                          {{recipe['recipe']['label']}}
+                    </td>
+                    <td>
+                        {{recipe['recipe']['calories']}}
                     </td>
                 </tr>
             {% endfor %}

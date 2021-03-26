@@ -82,3 +82,21 @@ def recipe_search():
 
     return render_template("recipe_display.html", recipe_list=recipe_list )
 
+@app.route('/nutrients_search', methods=['GET', 'POST'])
+def nutrients_search():
+    APP_ID = "a8ee5e3a"  # Put your app id for edamam api
+    APP_KEY = "a5af30bf418171d4c205bb8c27cb02f2"  # Put your app key for edamam api
+
+    NUTRITION_ID = "70dc1ef4"
+    NUTRITION_KEY = "aeff761abf4758bc4076d53add38585e"
+
+    search = "a cup of coke"
+    if request.method == 'POST':
+        result = request.form
+        search = result["Search Nutrients"]
+
+    recipe_app = Recipe(APP_ID, APP_KEY, NUTRITION_ID, NUTRITION_KEY)
+    nutrients_list = recipe_app.run_nutrition_query(search)
+
+    return render_template("nutrient_display.html", nutrients_list=nutrients_list)
+

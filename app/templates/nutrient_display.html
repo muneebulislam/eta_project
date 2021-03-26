@@ -1,0 +1,33 @@
+ <!--   Login Page -->
+ {% extends "base.html" %}
+ {% block content %}
+    <form action = "" method='POST'>
+         <p>Search Nutrients: <input type = "text" name = "Search Nutrients" /></p>
+         <p><input type = "submit" value = "submit" /></p>
+    </form>
+        <div>
+            Calories: {{nutrients_list['calories']}} <br>
+            Total weight: {{nutrients_list['totalWeight']}} <br>
+            Diet labels:<br>
+            {%for labels in nutrients_list['dietLabels']%}
+                {{labels}}<br>
+            {% endfor %}
+        </div>
+
+        <table>
+            <tr>
+                <th>Label</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+            </tr>
+            {% for main_key in nutrients_list['totalNutrients'] %}
+                <tr>
+                    {% for sub_key in nutrients_list['totalNutrients'][main_key] %}
+                    <td>
+                        {{nutrients_list['totalNutrients'][main_key][sub_key]}}
+                    </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+{% endblock %}

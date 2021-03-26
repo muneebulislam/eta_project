@@ -60,6 +60,45 @@ class Recipe:
             recipe_name = "Empty"
             recipe_list.append(recipe_name)
         return recipe_list
+    
+    
+    def run_nutrition_query(self,query):
+        """
+        Purpose:
+            Search on the website for the nutrition fact of an ingredient.
+        Pre-conditions:
+            None
+        Post_conditions:
+            None
+        Return: None
+        """
+        #Searches the input string made by user
+        nutrition_facts = self.__get_nutrition(query)
+        return nutrition_facts
+
+    def __get_nutrition(self, nutrition_query):
+        """
+        Purpose:
+            Gets the nutrition information that matches user input string.
+        Pre-conditions:
+            :param nutrition_query: the string that the user inputs into the search bar (nutrition)
+        Post_conditions:
+            None
+        Return: None
+        """
+
+        #Uses edamam API to do the searches
+        edamam_object = Edamam(nutrition_appid=self.nutrition_id, nutrition_appkey=self.nutrition_key)
+
+        try:
+            nutrition_facts = edamam_object.search_nutrient(nutrition_query)
+
+        #When the app could not found what the user is searching
+        except LowQualityQuery:
+            print("Could not find the nutrition facts for your input!")
+        except APIError:
+            print("Search nutrients function is currently not available, please try again later!")
+        return nutrition_facts
 
 # Create App and run the app
 if __name__ == "__main__":
