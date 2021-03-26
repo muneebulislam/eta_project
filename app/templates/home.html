@@ -1,6 +1,9 @@
  <!--   Home page -->
 {% extends "base.html" %}
-{% block content %}
-    <h2>Home page.</h2>
-    <h1>Current User is:  {{ current_user.username }}!</h1>
+{% block app_content %}
+<div class="jumbotron text-center">
+    <h1>Welcome to Eta Recipes Home Page</h1>
+    <p>Search recipe by typing the ingredients, meal type or cuisine type in the recipe search box.</p> 
+    <p>You can search the nutrition values by entering "a cup of oatmeal" of "Two eggs" in the nutrition search box.</p> 
+</div>
 {% endblock %}

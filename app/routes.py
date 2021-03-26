@@ -52,7 +52,7 @@ def register():
     """
 
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
@@ -64,6 +64,7 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/recipe_search', methods=['GET', 'POST'])
+@login_required
 def recipe_search():
     APP_ID = "a8ee5e3a"  # Put your app id for edamam api
     APP_KEY = "a5af30bf418171d4c205bb8c27cb02f2"  # Put your app key for edamam api
@@ -83,6 +84,7 @@ def recipe_search():
     return render_template("recipe_display.html", recipe_list=recipe_list )
 
 @app.route('/nutrients_search', methods=['GET', 'POST'])
+@login_required
 def nutrients_search():
     APP_ID = "a8ee5e3a"  # Put your app id for edamam api
     APP_KEY = "a5af30bf418171d4c205bb8c27cb02f2"  # Put your app key for edamam api

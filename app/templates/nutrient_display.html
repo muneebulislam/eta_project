@@ -1,6 +1,6 @@
  <!--   Login Page -->
  {% extends "base.html" %}
- {% block content %}
+ {% block app_content %}
     <form action = "" method='POST'>
          <p>Search Nutrients: <input type = "text" name = "Search Nutrients" /></p>
          <p><input type = "submit" value = "submit" /></p>
@@ -14,7 +14,7 @@
             {% endfor %}
         </div>
 
-        <table>
+        <table class="table table-bordered">
             <tr>
                 <th>Label</th>
                 <th>Quantity</th>
