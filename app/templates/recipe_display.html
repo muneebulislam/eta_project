@@ -6,11 +6,11 @@
          <p><input type = "submit" value = "submit" /></p>
           </form>
 
-        <table>
+        <table class="table table-bordered">
             <tr>
-                <th>Recipe Image</th>
-                <th>Recipe Title</th>
-                <th>Calories</th>
+                <th scope="col">Recipe Image</th>
+                <th scope="col">Recipe Title</th>
+                <th scope="col">Calories</th>
             </tr>
             {% for recipe in recipe_list %}
                 <tr>
