@@ -6,6 +6,7 @@ from some unknown attacks. Password is not in string form but is hashed.
 from app import db
 from app import login
 from flask_login import UserMixin
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 class User(UserMixin, db.Model):
     """
@@ -34,3 +35,12 @@ class User(UserMixin, db.Model):
         @return: returns the User for the given id.
         """
         return User.query.get(int(id))
+
+class Recipe_db(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    recipe_url = db.Column(db.VARCHAR,index = True)
+    recipe_title= db.Column(db.VARCHAR, index= True, unique = True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    def __repr__(self):
+        return '<Recipe_db {}>'.format(self.recipe_title)

@@ -7,6 +7,7 @@ from werkzeug.urls import url_parse
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
 from app.recipe_construct import Recipe
+from app.models import Recipe_db
 from app.models import User
 
 @app.route('/')
@@ -101,4 +102,20 @@ def nutrients_search():
     nutrients_list = recipe_app.run_nutrition_query(search)
 
     return render_template("nutrient_display.html", nutrients_list=nutrients_list)
+
+@app.route("/save_recipe", methods=["GET", "POST"])
+@login_required
+def save_recipe():
+    saved_recipe= None
+    if request.form:
+        try:
+            current_recipe = Recipe_db(recipe_title=request.form.get("recipe_title"), recipe_url = request.form.get("recipe_url"))
+            db.session.add(current_recipe)
+            db.session.commit()
+        except Exception as e:
+            print("Failed to add book")
+            print(e)
+    saved_recipe = Recipe_db.query.all()
+    return render_template("save_recipe.html", saved_recipe = saved_recipe)
+
 
