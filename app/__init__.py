@@ -18,4 +18,4 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
 # imports at the end to avoid circular dependencies.
-from app import routes, models
+from app import routes, models, errors

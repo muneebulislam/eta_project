@@ -4,7 +4,7 @@ flask shell and then use it. We can access the variables like db, Use etc direct
 shell.
 """
 from app import app, db
-from app.models import User
+from app.models import User, Recipe_db
 @app.shell_context_processor
 def make_shell_context():
-    return {'db': db, 'User': User}
+    return {'db': db, 'User': User, 'Recipe_db': Recipe_db}
