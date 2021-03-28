@@ -11,15 +11,13 @@
                 <th scope="col">Recipe Image</th>
                 <th scope="col">Recipe Title</th>
                 <th scope="col">Calories</th>
+                <th scope="col">Links to Recipe</th>
                 <th scope="col">Save Recipies</th>
             </tr>
             {% for recipe in recipe_list %}
                 <tr>
                     <td>
-                        <img src= "{{recipe['recipe']['image']}}" alt="recipe image" usemap="#workmap">
-                        <map name="workmap">
-                            <area shape="default"  href={{recipe['recipe']['url']}}>
-                        </map>
+                        <img src= "{{recipe['recipe']['image']}}" alt="recipe image">
                     </td>
                     <td>
                          {{recipe['recipe']['label']}}
@@ -27,6 +25,10 @@
                     <td>
                         {{recipe['recipe']['calories']}}
                     </td>
+                    <td>
+                        <a href="{{recipe['recipe']['url']}}"> Link to Recipe</a>
+                    </td>
+
                     <td>
                         <form method="POST" action="/save_recipe" style="display: inline">
                               <input type="hidden" value="{{recipe['recipe']['label']}}" name="recipe_title">

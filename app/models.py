@@ -37,6 +37,9 @@ class User(UserMixin, db.Model):
         return User.query.get(int(id))
 
 class Recipe_db(db.Model):
+    """
+    Database for the Recipe
+    """
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     recipe_url = db.Column(db.VARCHAR ,unique=True, nullable=False)
