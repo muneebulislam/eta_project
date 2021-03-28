@@ -11,6 +11,7 @@
                 <th scope="col">Recipe Image</th>
                 <th scope="col">Recipe Title</th>
                 <th scope="col">Calories</th>
+                <th scope="col">Recipe URL</th>
             </tr>
             {% for recipe in recipe_list %}
                 <tr>
@@ -23,6 +24,9 @@
                     <td>
                          {{recipe['recipe']['label']}}
                     </td>
+                    <td>
+                        {{recipe['recipe']['calories']}}
+                   </td>
                     <td>
                         {{recipe['recipe']['url']}}
                     </td>
