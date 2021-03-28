@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block app_content %}
+    <h1>Add Recipe</h1>
+    <form action="" method="POST" >
+        <input type="text" name="recipe_title">
+        <input type="text" name="recipe_url">
+        <input type="submit" value="Add">
+    </form>
+
+    <h1>Saved Recipes</h1>
+
+      <table class="table table-bordered">
+        <tr>
+            <th scope="col">Recipe Title</th>
+            <th scope="col">Recipe URL</th>
+        </tr>
+        {% for recipe in saved_recipe %}
+            <tr>
+              <td>
+                  {{recipe.recipe_title}}
+              </td>
+                <td>
+                  {{recipe.recipe_url}}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
