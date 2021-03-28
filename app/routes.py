@@ -104,7 +104,6 @@ def nutrients_search():
     return render_template("nutrient_display.html", nutrients_list=nutrients_list)
 
 @app.route("/save_recipe", methods=["GET", "POST"])
-@login_required
 def save_recipe():
     saved_recipe= None
     if request.form:
@@ -113,10 +112,17 @@ def save_recipe():
             db.session.add(current_recipe)
             db.session.commit()
         except Exception as e:
-            print("Failed to add book")
+            print("Failed to add Recipe")
             print(e)
+    # saved_recipe = Recipe_db.query.all()
+    # return render_template("saved_recipes.html", saved_recipe = saved_recipe)
+    return redirect(url_for("recipe_search"))
+
+@app.route('/saved_recipes', methods = ['GET','POST'])
+@login_required
+def saved_recipes():
     saved_recipe = Recipe_db.query.all()
-    return render_template("save_recipe.html", saved_recipe = saved_recipe)
+    return render_template("saved_recipes.html", saved_recipe = saved_recipe)
 
 @app.route("/delete", methods=["POST"])
 def delete():
@@ -125,6 +131,6 @@ def delete():
     recipe = Recipe_db.query.filter_by(recipe_title=title).first()
     db.session.delete(recipe)
     db.session.commit()
-    return redirect(url_for("save_recipe"))
+    return redirect(url_for("saved_recipes"))
 
 

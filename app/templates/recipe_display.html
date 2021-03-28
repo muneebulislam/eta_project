@@ -11,7 +11,7 @@
                 <th scope="col">Recipe Image</th>
                 <th scope="col">Recipe Title</th>
                 <th scope="col">Calories</th>
-                <th scope="col">Recipe URL</th>
+                <th scope="col">Save Recipies</th>
             </tr>
             {% for recipe in recipe_list %}
                 <tr>
@@ -28,7 +28,11 @@
                         {{recipe['recipe']['calories']}}
                     </td>
                     <td>
-                        {{recipe['recipe']['url']}}
+                        <form method="POST" action="/save_recipe" style="display: inline">
+                              <input type="hidden" value="{{recipe['recipe']['label']}}" name="recipe_title">
+                              <input type="hidden" value="{{recipe['recipe']['url']}}"s name="recipe_url">
+                              <input type="submit" value="Save Recipe">
+                        </form>
                     </td>
                 </tr>
             {% endfor %}

@@ -39,8 +39,8 @@ class User(UserMixin, db.Model):
 class Recipe_db(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    recipe_url = db.Column(db.VARCHAR)
-    recipe_title= db.Column(db.VARCHAR)
+    recipe_url = db.Column(db.VARCHAR ,unique=True, nullable=False)
+    recipe_title= db.Column(db.VARCHAR, unique=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     def __repr__(self):
         return '<Recipe_db {}>'.format(self.recipe_title)
