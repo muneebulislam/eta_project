@@ -118,4 +118,13 @@ def save_recipe():
     saved_recipe = Recipe_db.query.all()
     return render_template("save_recipe.html", saved_recipe = saved_recipe)
 
+@app.route("/delete", methods=["POST"])
+def delete():
+   
+    title = request.form.get("title")
+    recipe = Recipe_db.query.filter_by(recipe_title=title).first()
+    db.session.delete(recipe)
+    db.session.commit()
+    return redirect(url_for("save_recipe"))
+
 

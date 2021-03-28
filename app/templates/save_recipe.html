@@ -2,8 +2,8 @@
 {% block app_content %}
     <h1>Add Recipe</h1>
     <form action="" method="POST" >
-        <input type="text" name="recipe_title">
-        <input type="text" name="recipe_url">
+        <input type="text" name="recipe_title" placeholder ="Enter recipe title">
+        <input type="text" name="recipe_url" placeholder ="Enter recipe url">
         <input type="submit" value="Add">
     </form>
 
@@ -13,14 +13,21 @@
         <tr>
             <th scope="col">Recipe Title</th>
             <th scope="col">Recipe URL</th>
+            <th scope="col">Action</th>
         </tr>
         {% for recipe in saved_recipe %}
             <tr>
               <td>
-                  {{recipe.recipe_title}}
+                {{recipe.recipe_title}}
               </td>
                 <td>
-                  {{recipe.recipe_url}}
+                  <a href="{{recipe.recipe_url}}">See Full Recipe</a>
+                </td>
+                <td>
+                  <form method="POST" action="/delete" style="display: inline">
+                    <input type="hidden" value="{{recipe.recipe_title}}" name="title">
+                    <input type="submit" value="Delete">
+                  </form>
                 </td>
             </tr>
         {% endfor %}
